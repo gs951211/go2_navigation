@@ -50,6 +50,13 @@ def generate_launch_description():
         description='bool value to choose between mapping and navigation'
     )
     slam_enable = LaunchConfiguration('slam_enable')
+    
+    declare_start_nav_cmd = DeclareLaunchArgument(
+        'start_nav',
+        default_value='True',
+        description='Whether to start Nav2 (navigation) from this launch'
+    )
+    start_nav = LaunchConfiguration('start_nav')
 
     robot_description_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
@@ -136,7 +143,8 @@ def generate_launch_description():
             'use_sim_time': 'false'    
             # 'autostart': 'true'              
         }.items()
-        # condition=IfCondition(PythonExpression([rviz]))
+        ,
+        condition=IfCondition(PythonExpression([start_nav]))
     )
 
     ld = LaunchDescription()
@@ -146,6 +154,7 @@ def generate_launch_description():
     ld.add_action(robot_description_cmd)
     ld.add_action(declare_nav2_params_file_cmd)
     ld.add_action(declare_slam_enable_cmd)
+    ld.add_action(declare_start_nav_cmd)
     # ld.add_action(lidar_cmd)
     # ld.add_action(realsense_cmd)
     ld.add_action(driver_cmd)
