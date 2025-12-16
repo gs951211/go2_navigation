@@ -56,7 +56,8 @@ source install/setup.bash
 - 示例：启动导航 mapping（根据顶层 README）
 
 ```bash
-ros2 launch go2_navigation mapping.launch.py rviz:=True
+# 启动建图（mapping）并同时启动 Nav2（默认行为）
+ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True
 ```
 
 - 常用启动文件位置：
@@ -131,7 +132,11 @@ ros2 launch go2_navigation navigation.launch.py rviz:=True map_file:=/path/to/ma
 - 启动建图（SLAM）并打开 RViz:
 
 ```bash
-ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True
+# 启动建图并不启动 Nav2（推荐用于专注采图阶段）
+ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True start_nav:=False
+
+# 或者：默认行为（同时启动建图与 Nav2）
+ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True start_nav:=True
 ```
 
 ## Launch 参数清单（默认值与说明）
