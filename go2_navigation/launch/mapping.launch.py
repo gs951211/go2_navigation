@@ -67,14 +67,15 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('go2_rviz'),
             'launch/'), 'rviz.launch.py']),
-        condition=IfCondition(PythonExpression([rviz]))
+        condition=IfCondition(rviz)
     )
 
     livox_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('livox_ros_driver2'),
             'launch_ROS2/'), 'rviz_MID360_launch.py'])
-        # condition=IfCondition(PythonExpression([rviz]))
+        ,
+        condition=IfCondition(rviz)
     )
 
     # for mapping
