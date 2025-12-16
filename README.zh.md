@@ -179,3 +179,63 @@ ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True
 - 当你需要为真实机器人运行（非仿真）时，将 `use_sim_time` 设为 `False`，并确保 `nav2` 的 `params_file` 中 `use_sim_time` 也被正确覆盖。
 - 若同时接入 Livox、Hesai、RealSense 等多个传感器，先单独验证各驱动节点的 TF/Topic 输出，再在 `go2_bringup` 中组合启动以确保重映射（remap）规则正确。
 
+## 如何保存地图（保存 map.yaml + 地图图像）
+
+下面给出在本仓库环境中常用的保存地图方法、示例命令和配置建议。仓库内相关配置：
+
+- `go2_navigation/config/slam_config.yaml` 中含有：
+  - `save_map_on_shutdown: true`（如果启用，`slam_toolbox` 在节点干净退出时会尝试保存地图，前提是 `use_map_saver: true` 且系统中可用 `nav2` 的 map_saver 服务）。
+  - `use_map_saver: true`（表示使用 Nav2 的 map_saver 工具保存）。
+  - 可配置 `map_file_name`（默认被注释），可以设置为例如 `/home/unitree/maps/my_map`（不带扩展名）。
+
+- `go2_navigation/config/nav2_config.yaml` 中含 `map_saver` 段落，可设置：
+  - `save_map_timeout`（秒），以及 `free_thresh_default`、`occupied_thresh_default`（影响生成的二值地图阈值）。
+
+推荐的保存流程（稳健且可复现）：
+
+1) 运行建图（mapping）：
+
+```bash
+ros2 launch go2_navigation mapping.launch.py rviz:=True slam_enable:=True
+```
+
+2) 手动/远程遥控机器人移动，覆盖所需环境并确认在 RViz / slam_toolbox 中生成的地图满足要求。
+
+3a) 自动保存（简单）：在 `slam_config.yaml` 中启用了 `save_map_on_shutdown: true` 且 `use_map_saver: true` 时，按 Ctrl+C 并干净退出 launch（或优雅停止 `slam_toolbox` 节点），`slam_toolbox` 会尝试调用 map_saver 将地图保存到默认位置或 `map_file_name` 指定的位置。
+
+3b) 显式保存（推荐，可控制路径与文件名）：使用 Nav2 提供的 map_saver CLI 将当前地图保存为指定文件名（生成两个文件：`<name>.yaml` 与 `<name>.(pgm|png)`）：
+
+```bash
+# 在任意终端（已 source 你的 ROS2 环境）执行——将 <output_path/map_name> 替换为你的路径与名称
+ros2 run nav2_map_server map_saver_cli -f /home/unitree/go2_ws1/map/map
+```
+
+说明：
+- 上述命令会输出两份文件，例如 `/home/you/maps/my_map.yaml` 和 `/home/you/maps/my_map.pgm`（或 `.png`，取决于实现）。
+- 如果你的 `nav2` 配置中修改了 `map_saver` 的阈值（`free_thresh_default` / `occupied_thresh_default`），保存结果会遵循那些阈值。
+
+4) 如果你更倾向通过配置自动指定文件名：在 `go2_navigation/config/slam_config.yaml` 中取消注释并设置 `map_file_name`：
+
+```yaml
+# 示例：
+map_file_name: /home/unitree/go2_ws1/map/map
+save_map_on_shutdown: true
+use_map_saver: true
+```
+
+此配置会让 `slam_toolbox` 在关闭时尝试使用 `/home/unitree/go2_ws1/map/map` 作为基名保存（最终产生 `/home/unitree/go2_ws1/map/map.yaml` 与图像文件）。
+
+额外建议与常见问题：
+- 确保保存前 `nav2_map_server`/`map_saver` 服务可用；若使用 `go2_navigation` 的 launch 会间接启动 nav2 相关组件，通常可直接运行 `map_saver_cli`。
+- 保存权限：目标保存目录需要对运行用户有写权限（特别是在机器人上的 /home 或 /opt 路径）。
+- 保存格式：默认会生成 YAML（地图元数据）与图像（PGM/PNG）。将 YAML 与图像一起保管、备份并在导航时通过 `map_server` 加载 YAML 即可用于定位。
+- 要在定位/导航模式中加载已保存地图，请使用 `go2_navigation/navigation.launch.py` 并指定 `map_file` 参数：
+
+```bash
+ros2 launch go2_navigation navigation.launch.py map_file:=/home/you/maps/my_map.yaml rviz:=True
+```
+
+如果你希望，我可以：
+- 为 Jetson 上保存地图给出逐步示例（路径、权限与常见目录），
+- 或在仓库中添加一个小脚本（例如 `scripts/save_map.sh`）封装 `map_saver_cli`，并更新 `README.zh.md` 中的“快速保存”示例。告诉我你更希望哪个，我会继续实现。
+

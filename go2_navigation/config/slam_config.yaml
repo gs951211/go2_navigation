@@ -44,7 +44,7 @@
     # throttle_scans: false          
     max_keyframes_per_second: 1.0  
 
-    # map_file_name: /home/unitree/go2_ws1/map/map                  
+    map_file_name: /home/unitree/go2_ws1/map/map                  
     save_map_on_shutdown: true   
     load_map_on_startup: true    
     use_map_saver: true
