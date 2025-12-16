@@ -28,7 +28,6 @@ def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
 
     namespace = LaunchConfiguration('namespace')
-    map_file = LaunchConfiguration('map_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')
     params_file = LaunchConfiguration('params_file')
@@ -74,10 +73,6 @@ def generate_launch_description():
             description='Top-level namespace'),
 
         DeclareLaunchArgument(
-            'map_file', default_value='',
-            description='Full path to map yaml file to load for localization. (required for localization mode)'),
-
-        DeclareLaunchArgument(
             'use_sim_time', default_value='false',
             description='Use simulation (Gazebo) clock if true'),
 
@@ -106,7 +101,8 @@ def generate_launch_description():
             name='map_server',
             output='screen',
             parameters=[
-                {'yaml_filename': map_file}
+                {'yaml_filename': "/home/unitree/go2_ws1/map/map.yaml"}
+                # {'use_sim_time': False}
             ]
         ),
 

@@ -1,0 +1,695 @@
+unitree@ubuntu:~/go2_ws1$ ros2 launch go2_navigation mapping.launch.py rviz:=False slam_enable:=True
+[INFO] [launch]: All log files can be found below /home/unitree/.ros/log/2025-12-16-21-09-40-100407-ubuntu-25924
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [25936]
+[INFO] [component_container-2]: process started with pid [25938]
+[INFO] [pointcloud_to_laserscan_node-3]: process started with pid [25940]
+[INFO] [pointcloud_to_laserscan_node-4]: process started with pid [25942]
+[INFO] [async_slam_toolbox_node-5]: process started with pid [25944]
+[INFO] [controller_server-6]: process started with pid [25946]
+[INFO] [planner_server-7]: process started with pid [25948]
+[INFO] [recoveries_server-8]: process started with pid [25950]
+[INFO] [bt_navigator-9]: process started with pid [25952]
+[INFO] [waypoint_follower-10]: process started with pid [25964]
+[INFO] [lifecycle_manager-11]: process started with pid [26003]
+[robot_state_publisher-1] Parsing robot urdf xml string.
+[robot_state_publisher-1] The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-1] Link FL_hip had 1 children
+[robot_state_publisher-1] Link FL_thigh had 1 children
+[robot_state_publisher-1] Link FL_calf had 2 children
+[robot_state_publisher-1] Link FL_calflower had 1 children
+[robot_state_publisher-1] Link FL_calflower1 had 0 children
+[robot_state_publisher-1] Link FL_foot had 0 children
+[robot_state_publisher-1] Link FR_hip had 1 children
+[robot_state_publisher-1] Link FR_thigh had 1 children
+[robot_state_publisher-1] Link FR_calf had 2 children
+[robot_state_publisher-1] Link FR_calflower had 1 children
+[robot_state_publisher-1] Link FR_calflower1 had 0 children
+[robot_state_publisher-1] Link FR_foot had 0 children
+[robot_state_publisher-1] Link Head_upper had 1 children
+[robot_state_publisher-1] Link Head_lower had 0 children
+[robot_state_publisher-1] Link RL_hip had 1 children
+[robot_state_publisher-1] Link RL_thigh had 1 children
+[robot_state_publisher-1] Link RL_calf had 2 children
+[robot_state_publisher-1] Link RL_calflower had 1 children
+[robot_state_publisher-1] Link RL_calflower1 had 0 children
+[robot_state_publisher-1] Link RL_foot had 0 children
+[robot_state_publisher-1] Link RR_hip had 1 children
+[robot_state_publisher-1] Link RR_thigh had 1 children
+[robot_state_publisher-1] Link RR_calf had 2 children
+[robot_state_publisher-1] Link RR_calflower had 1 children
+[robot_state_publisher-1] Link RR_calflower1 had 0 children
+[robot_state_publisher-1] Link RR_foot had 0 children
+[robot_state_publisher-1] Link imu had 1 children
+[robot_state_publisher-1] Link livox_frame had 0 children
+[robot_state_publisher-1] Link radar had 0 children
+[robot_state_publisher-1] [INFO] [1765890580.711781559] [robot_state_publisher]: got segment FL_calf
+[robot_state_publisher-1] [INFO] [1765890580.711969883] [robot_state_publisher]: got segment FL_calflower
+[robot_state_publisher-1] [INFO] [1765890580.711998396] [robot_state_publisher]: got segment FL_calflower1
+[robot_state_publisher-1] [INFO] [1765890580.712015228] [robot_state_publisher]: got segment FL_foot
+[robot_state_publisher-1] [INFO] [1765890580.712029276] [robot_state_publisher]: got segment FL_hip
+[robot_state_publisher-1] [INFO] [1765890580.712042525] [robot_state_publisher]: got segment FL_thigh
+[robot_state_publisher-1] [INFO] [1765890580.712056509] [robot_state_publisher]: got segment FR_calf
+[robot_state_publisher-1] [INFO] [1765890580.712069885] [robot_state_publisher]: got segment FR_calflower
+[robot_state_publisher-1] [INFO] [1765890580.712083742] [robot_state_publisher]: got segment FR_calflower1
+[robot_state_publisher-1] [INFO] [1765890580.712097214] [robot_state_publisher]: got segment FR_foot
+[robot_state_publisher-1] [INFO] [1765890580.712111134] [robot_state_publisher]: got segment FR_hip
+[robot_state_publisher-1] [INFO] [1765890580.712124383] [robot_state_publisher]: got segment FR_thigh
+[robot_state_publisher-1] [INFO] [1765890580.712137887] [robot_state_publisher]: got segment Head_lower
+[robot_state_publisher-1] [INFO] [1765890580.712151775] [robot_state_publisher]: got segment Head_upper
+[robot_state_publisher-1] [INFO] [1765890580.712166399] [robot_state_publisher]: got segment RL_calf
+[robot_state_publisher-1] [INFO] [1765890580.712179392] [robot_state_publisher]: got segment RL_calflower
+[robot_state_publisher-1] [INFO] [1765890580.712193024] [robot_state_publisher]: got segment RL_calflower1
+[robot_state_publisher-1] [INFO] [1765890580.712206752] [robot_state_publisher]: got segment RL_foot
+[robot_state_publisher-1] [INFO] [1765890580.712220609] [robot_state_publisher]: got segment RL_hip
+[robot_state_publisher-1] [INFO] [1765890580.712234401] [robot_state_publisher]: got segment RL_thigh
+[robot_state_publisher-1] [INFO] [1765890580.712247297] [robot_state_publisher]: got segment RR_calf
+[robot_state_publisher-1] [INFO] [1765890580.712260034] [robot_state_publisher]: got segment RR_calflower
+[robot_state_publisher-1] [INFO] [1765890580.712273602] [robot_state_publisher]: got segment RR_calflower1
+[robot_state_publisher-1] [INFO] [1765890580.712286658] [robot_state_publisher]: got segment RR_foot
+[robot_state_publisher-1] [INFO] [1765890580.712299491] [robot_state_publisher]: got segment RR_hip
+[robot_state_publisher-1] [INFO] [1765890580.712313091] [robot_state_publisher]: got segment RR_thigh
+[robot_state_publisher-1] [INFO] [1765890580.712327619] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-1] [INFO] [1765890580.712341188] [robot_state_publisher]: got segment imu
+[robot_state_publisher-1] [INFO] [1765890580.712355076] [robot_state_publisher]: got segment livox_frame
+[robot_state_publisher-1] [INFO] [1765890580.712368452] [robot_state_publisher]: got segment radar
+[controller_server-6] [INFO] [1765890580.731328827] [controller_server]:
+[controller_server-6]   controller_server lifecycle node launched.
+[controller_server-6]   Waiting on external lifecycle transitions to activate
+[controller_server-6]   See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1765890580.740805847] [controller_server]: Creating controller server
+[bt_navigator-9] [INFO] [1765890580.746113362] [bt_navigator]:
+[bt_navigator-9]        bt_navigator lifecycle node launched.
+[bt_navigator-9]        Waiting on external lifecycle transitions to activate
+[bt_navigator-9]        See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-9] [INFO] [1765890580.749862184] [bt_navigator]: Creating
+[waypoint_follower-10] [INFO] [1765890580.750896928] [waypoint_follower]:
+[waypoint_follower-10]  waypoint_follower lifecycle node launched.
+[waypoint_follower-10]  Waiting on external lifecycle transitions to activate
+[waypoint_follower-10]  See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-10] [INFO] [1765890580.751088389] [waypoint_follower]: Creating
+[lifecycle_manager-11] [INFO] [1765890580.753106579] [lifecycle_manager_navigation]: Creating
+[planner_server-7] [INFO] [1765890580.771801700] [planner_server]:
+[planner_server-7]      planner_server lifecycle node launched.
+[controller_server-6] [INFO] [1765890580.774830058] [local_costmap.local_costmap]:
+[controller_server-6]   local_costmap lifecycle node launched.
+[controller_server-6]   Waiting on external lifecycle transitions to activate
+[controller_server-6]   See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-7]      Waiting on external lifecycle transitions to activate
+[planner_server-7]      See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1765890580.780689938] [local_costmap.local_costmap]: Creating Costmap
+[planner_server-7] [INFO] [1765890580.786451960] [planner_server]: Creating
+[lifecycle_manager-11] [INFO] [1765890580.787161160] [lifecycle_manager_navigation]: Creating and initializing lifecycle service clients
+[recoveries_server-8] [INFO] [1765890580.802737905] [recoveries_server]:
+[recoveries_server-8]   recoveries_server lifecycle node launched.
+[recoveries_server-8]   Waiting on external lifecycle transitions to activate
+[recoveries_server-8]   See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-7] [INFO] [1765890580.844366580] [global_costmap.global_costmap]:
+[planner_server-7]      global_costmap lifecycle node launched.
+[planner_server-7]      Waiting on external lifecycle transitions to activate
+[planner_server-7]      See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-7] [INFO] [1765890580.848140556] [global_costmap.global_costmap]: Creating Costmap
+[lifecycle_manager-11] [INFO] [1765890580.858963302] [lifecycle_manager_navigation]: Starting managed nodes bringup...
+[lifecycle_manager-11] [INFO] [1765890580.859064905] [lifecycle_manager_navigation]: Configuring controller_server
+[component_container-2] [INFO] [1765890580.925849875] [go2_container]: Load Library: /home/unitree/go2_ws1/install/go2_driver/lib/libgo2_driver.so
+[component_container-2] [INFO] [1765890580.933255615] [go2_container]: Found class: rclcpp_components::NodeFactoryTemplate<go2_driver::Go2Driver>
+[component_container-2] [INFO] [1765890580.933380034] [go2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<go2_driver::Go2Driver>
+[controller_server-6] [INFO] [1765890581.059927413] [controller_server]: Configuring controller interface
+[controller_server-6] [INFO] [1765890581.081424007] [controller_server]: Controller frequency set to 15.0000Hz
+[controller_server-6] [INFO] [1765890581.081580747] [local_costmap.local_costmap]: Configuring
+[controller_server-6] [INFO] [1765890581.091850969] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-6] [INFO] [1765890581.107510564] [local_costmap.local_costmap]: Subscribed to Topics: pointcloud_dog
+[pointcloud_to_laserscan_node-4] [INFO] [1765890581.146777074] [pointcloud_to_laserscan]: Got a subscriber to laserscan, starting pointcloud subscriber
+[async_slam_toolbox_node-5] [INFO] [1765890581.146910421] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[controller_server-6] [INFO] [1765890581.148497946] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-6] [INFO] [1765890581.148608892] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-6] [INFO] [1765890581.153170598] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/go2_driver' in container '/go2_container'
+[controller_server-6] [INFO] [1765890581.182911543] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-6] [INFO] [1765890581.188097519] [controller_server]: Created goal_checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-6] [INFO] [1765890581.209101814] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-6] [INFO] [1765890581.230310082] [controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-6] [INFO] [1765890581.326482743] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-6] [INFO] [1765890581.333989317] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.336645186] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-6] [INFO] [1765890581.342330918] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.343309565] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-6] [INFO] [1765890581.346181119] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.347265240] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-6] [INFO] [1765890581.352000198] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.353589963] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-6] [INFO] [1765890581.357777004] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.359390001] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-6] [INFO] [1765890581.363334381] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.367094596] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-6] [INFO] [1765890581.371720591] [controller_server]: Critic plugin initialized
+[controller_server-6] [INFO] [1765890581.371805969] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-11] [INFO] [1765890581.446553813] [lifecycle_manager_navigation]: Configuring planner_server
+[planner_server-7] [INFO] [1765890581.448109209] [planner_server]: Configuring
+[planner_server-7] [INFO] [1765890581.448208156] [global_costmap.global_costmap]: Configuring
+[planner_server-7] [INFO] [1765890581.501710868] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-7] [INFO] [1765890581.512907735] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with volatile durability
+[planner_server-7] [INFO] [1765890581.515876060] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-7] [INFO] [1765890581.515967422] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-7] [INFO] [1765890581.529680860] [global_costmap.global_costmap]: Subscribed to Topics: pointcloud
+[planner_server-7] [INFO] [1765890581.559087270] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-7] [INFO] [1765890581.559291722] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-7] [INFO] [1765890581.568114103] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-7] [INFO] [1765890581.599959193] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-7] [INFO] [1765890581.600080124] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-7] [INFO] [1765890581.624153802] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-11] [INFO] [1765890581.636455207] [lifecycle_manager_navigation]: Configuring recoveries_server
+[recoveries_server-8] [INFO] [1765890581.636987699] [recoveries_server]: Configuring
+[recoveries_server-8] [INFO] [1765890581.656365524] [recoveries_server]: Creating recovery plugin spin of type nav2_recoveries/Spin
+[recoveries_server-8] [INFO] [1765890581.660599094] [recoveries_server]: Configuring spin
+[recoveries_server-8] [INFO] [1765890581.679684721] [recoveries_server]: Creating recovery plugin backup of type nav2_recoveries/BackUp
+[recoveries_server-8] [INFO] [1765890581.682598260] [recoveries_server]: Configuring backup
+[recoveries_server-8] [INFO] [1765890581.696928512] [recoveries_server]: Creating recovery plugin wait of type nav2_recoveries/Wait
+[recoveries_server-8] [INFO] [1765890581.700179788] [recoveries_server]: Configuring wait
+[lifecycle_manager-11] [INFO] [1765890581.716913103] [lifecycle_manager_navigation]: Configuring bt_navigator
+[bt_navigator-9] [INFO] [1765890581.717484669] [bt_navigator]: Configuring
+[bt_navigator-9] [INFO] [1765890581.835668912] [bt_navigator_rclcpp_node]: Waiting for "compute_path_to_pose" action server
+[bt_navigator-9] [INFO] [1765890581.839162785] [bt_navigator_rclcpp_node]: "ComputePathToPose" BtActionNode initialized
+[bt_navigator-9] [INFO] [1765890581.844464124] [bt_navigator_rclcpp_node]: Waiting for "global_costmap/clear_entirely_global_costmap" service
+[bt_navigator-9] [INFO] [1765890581.846001439] [bt_navigator_rclcpp_node]: "ClearGlobalCostmap-Context" BtServiceNode initialized
+[bt_navigator-9] [INFO] [1765890581.862916999] [bt_navigator_rclcpp_node]: Waiting for "follow_path" action server
+[bt_navigator-9] [INFO] [1765890581.865198844] [bt_navigator_rclcpp_node]: "FollowPath" BtActionNode initialized
+[bt_navigator-9] [INFO] [1765890581.869713381] [bt_navigator_rclcpp_node]: Waiting for "local_costmap/clear_entirely_local_costmap" service
+[bt_navigator-9] [INFO] [1765890581.871029443] [bt_navigator_rclcpp_node]: "ClearLocalCostmap-Context" BtServiceNode initialized
+[bt_navigator-9] [INFO] [1765890581.875727888] [bt_navigator_rclcpp_node]: Waiting for "local_costmap/clear_entirely_local_costmap" service
+[bt_navigator-9] [INFO] [1765890581.876812617] [bt_navigator_rclcpp_node]: "ClearLocalCostmap-Subtree" BtServiceNode initialized
+[bt_navigator-9] [INFO] [1765890581.880681731] [bt_navigator_rclcpp_node]: Waiting for "global_costmap/clear_entirely_global_costmap" service
+[bt_navigator-9] [INFO] [1765890581.881625337] [bt_navigator_rclcpp_node]: "ClearGlobalCostmap-Subtree" BtServiceNode initialized
+[bt_navigator-9] [INFO] [1765890581.895641150] [bt_navigator_rclcpp_node]: Waiting for "spin" action server
+[bt_navigator-9] [INFO] [1765890581.897156513] [bt_navigator_rclcpp_node]: "Spin" BtActionNode initialized
+[bt_navigator-9] [INFO] [1765890581.911120036] [bt_navigator_rclcpp_node]: Waiting for "wait" action server
+[bt_navigator-9] [INFO] [1765890581.912624263] [bt_navigator_rclcpp_node]: "Wait" BtActionNode initialized
+[lifecycle_manager-11] [INFO] [1765890581.920483037] [lifecycle_manager_navigation]: Configuring waypoint_follower
+[waypoint_follower-10] [INFO] [1765890581.922278919] [waypoint_follower]: Configuring
+[lifecycle_manager-11] [INFO] [1765890581.975921506] [lifecycle_manager_navigation]: Activating controller_server
+[controller_server-6] [INFO] [1765890581.976402669] [controller_server]: Activating
+[controller_server-6] [INFO] [1765890581.976472111] [local_costmap.local_costmap]: Activating
+[controller_server-6] [INFO] [1765890581.976503376] [local_costmap.local_costmap]: Checking transform
+[controller_server-6] [INFO] [1765890581.976770230] [local_costmap.local_costmap]: start
+[lifecycle_manager-11] [INFO] [1765890582.029325912] [lifecycle_manager_navigation]: Activating planner_server
+[planner_server-7] [INFO] [1765890582.029789795] [planner_server]: Activating
+[planner_server-7] [INFO] [1765890582.029870597] [global_costmap.global_costmap]: Activating
+[planner_server-7] [INFO] [1765890582.029905254] [global_costmap.global_costmap]: Checking transform
+[planner_server-7] [INFO] [1765890582.030047305] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1765890582.027611 but the earliest data is at time 1765890582.042943, when looking up transform from frame [base_link] to frame [map]
+[planner_server-7] [INFO] [1765890582.530150235] [global_costmap.global_costmap]: start
+[planner_server-7] [WARN] [1765890582.538419035] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [INFO] [1765890582.581337374] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[lifecycle_manager-11] [INFO] [1765890582.583187209] [lifecycle_manager_navigation]: Activating recoveries_server
+[recoveries_server-8] [INFO] [1765890582.583640820] [recoveries_server]: Activating
+[recoveries_server-8] [INFO] [1765890582.583725014] [recoveries_server]: Activating spin
+[recoveries_server-8] [INFO] [1765890582.583754966] [recoveries_server]: Activating backup
+[recoveries_server-8] [INFO] [1765890582.583779895] [recoveries_server]: Activating wait
+[lifecycle_manager-11] [INFO] [1765890582.585906632] [lifecycle_manager_navigation]: Activating bt_navigator
+[bt_navigator-9] [INFO] [1765890582.586347474] [bt_navigator]: Activating
+[lifecycle_manager-11] [INFO] [1765890582.588667944] [lifecycle_manager_navigation]: Activating waypoint_follower
+[waypoint_follower-10] [INFO] [1765890582.589698016] [waypoint_follower]: Activating
+[lifecycle_manager-11] [INFO] [1765890582.591064448] [lifecycle_manager_navigation]: Managed nodes are active
+[planner_server-7] [WARN] [1765890583.538342979] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890584.538340227] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890585.538346841] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890586.538344357] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890587.538342918] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890588.538341406] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890589.538343819] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890590.538381455] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890591.538377448] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890591.538515979] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890592.538379702] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890593.538365850] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890594.538370707] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890595.538385378] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890596.538377863] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890597.538375200] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890598.538392624] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890599.538375412] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890600.538380174] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890601.538380253] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890601.538521504] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890602.538371681] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890603.538389339] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890604.538389001] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890605.538410062] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890606.538372869] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890607.538382963] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890608.538387318] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890609.538374734] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890610.538387738] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890611.538384316] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890611.538522527] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890612.538375089] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890617.044453925] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.111129089] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.177778877] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.244456217] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.311135126] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.377804306] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.444466350] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.511136043] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.577798439] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.644528932] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.711126111] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.777808700] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.844468600] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890617.911127828] [local_costmap.local_costmap]: Sensor origin: (0.28, 0.01, 0.11), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890618.538382697] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890621.538396699] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890630.538373271] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890631.538381873] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890631.538521620] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890632.538391006] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890633.538390496] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890634.538385237] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890635.538380479] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890636.538381660] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890637.538392941] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890638.538380690] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890639.538381098] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890640.538376855] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890641.538383319] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890641.538514458] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890642.538398123] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890643.538387250] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890644.538376940] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890651.538386439] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890655.538376240] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890656.538388915] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890656.711134784] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890656.777795120] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890656.844465280] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890656.911128207] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890656.977806655] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890657.044458447] [local_costmap.local_costmap]: Sensor origin: (1.18, 1.92, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890657.538368008] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890658.538371888] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890659.538382892] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890660.538359417] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890661.538388987] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890661.538533311] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890662.538384111] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890663.538386038] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890664.538378159] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890665.538380252] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890666.538379259] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890667.538394989] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890668.538488276] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890669.538403657] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890670.538405490] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890671.538457488] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890671.538585107] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890672.538379484] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890673.538385790] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890674.538457459] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890677.538385722] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890681.538398971] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890683.538383000] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890684.538384578] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890685.538376094] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890686.538373291] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890687.538370283] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890688.538386813] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890689.538375553] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890690.538375414] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890691.538366653] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890691.538495456] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890692.538380791] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890693.538377601] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890694.538384350] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890695.538379404] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890696.177785844] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.244448724] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.311115797] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.377811094] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.444462390] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.511130391] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890696.538390156] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890696.577804215] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.644457656] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.711155769] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.777792185] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.844457305] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.911133274] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890696.977816891] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.044464188] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.111129565] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.177812384] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.244459073] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.311130979] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.377791460] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.444451622] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.511129192] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890697.538381150] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890697.577789097] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.644464171] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.711127149] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.777793711] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.844464656] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.911129938] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890697.977798548] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.044466422] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.111141049] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.177803356] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.244463519] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.311134498] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.377788772] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.444470056] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.511140395] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890698.538389473] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890698.577794541] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.644458480] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.711136755] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.777788118] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.844465241] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.911132156] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890698.977800447] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.044468034] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.111139238] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.177808491] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.244462734] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.311143475] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.377801079] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.444461850] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.511152095] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890699.538370517] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890699.577805219] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.644465095] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.711135819] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.777783342] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.844458547] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.911118327] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890699.977810075] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890700.044447391] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890700.111139717] [local_costmap.local_costmap]: Sensor origin: (-1.06, 0.58, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890700.538387516] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890701.538391028] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890701.538524951] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890702.538380508] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890703.538380215] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890704.538389027] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890705.538389024] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890706.538382287] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890707.538379374] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890708.538375199] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890709.538387522] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890710.538414230] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890711.538370905] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890711.538550942] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890712.538363951] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890713.538378326] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890714.538415855] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890715.538379479] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890716.538392401] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890717.538381435] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890718.538391031] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890719.538396292] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890720.538371104] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890721.538380207] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890721.538516434] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890722.538387086] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890723.538388894] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890724.538388958] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890725.538493906] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890726.538388561] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890727.538389443] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890728.538582155] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890729.538378937] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890730.538395038] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890731.538389746] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890731.538558710] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890732.538376374] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890733.538379372] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890734.538375953] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890735.538396584] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890736.538375982] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890737.538376357] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890738.538374731] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890739.538383651] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890740.538395946] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890741.538399554] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890741.538540774] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890742.538391146] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890743.538364673] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890743.777768586] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890743.844441568] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890743.911139734] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890743.977799755] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.044462145] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.111109975] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.177802030] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.244445860] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.311130714] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.377796529] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.444470375] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.511140094] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890744.538399881] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890744.577788019] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.644503563] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.711133249] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.777796983] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.844469165] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.911132388] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890744.977797914] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.044466609] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.111138440] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.177813504] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.244477655] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.311141807] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.377804902] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.444436701] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.511127093] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890745.538393697] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890745.577802956] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.644451363] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.711130651] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.777788146] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.844445993] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.911121281] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890745.977803897] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.044456305] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.111134633] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.177794146] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.244462362] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.311128147] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.377790827] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.444458980] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.511134012] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890746.538371336] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890746.577799669] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.644460141] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.711150662] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.777800382] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.844459799] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.911135823] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890746.977799144] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.044468289] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.111129402] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.177792852] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.244488846] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.311158248] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.377800833] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.444473946] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.511127700] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890747.538397793] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[controller_server-6] [WARN] [1765890747.577801965] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.644461031] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.711136704] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.777801466] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.844454067] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.911141453] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890747.977799111] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890748.044447424] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[controller_server-6] [WARN] [1765890748.111113339] [local_costmap.local_costmap]: Sensor origin: (-5.49, -2.57, 0.32), out of map bounds. The costmap can't raytrace for it.
+[planner_server-7] [WARN] [1765890748.538373768] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890749.538383072] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890750.538377351] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890751.538389279] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890751.538632646] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890752.538402503] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890753.538378461] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890754.538456166] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890755.538381723] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890756.538417378] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890757.538384023] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890758.538384092] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890759.538391058] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890760.538380022] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890761.538381418] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890761.538523534] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890762.538381358] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890763.538395298] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890764.538378436] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890765.538379254] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890766.538374775] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890767.538393289] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890768.538387401] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890769.538367192] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890770.538382519] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890771.538386309] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890771.538526921] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890772.538385410] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890773.538382095] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890774.538381802] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890775.538387701] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890776.538411792] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890777.538380664] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890778.538383696] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890779.538376759] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890780.538389261] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890781.538361265] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890781.538489940] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890782.538380965] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890783.538379304] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890784.538383001] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890785.538370585] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890786.538447243] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890787.538382183] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890788.538382259] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890789.538376334] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890790.538379320] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890791.538388433] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890791.538518357] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890792.538365560] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890793.538377486] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890794.538433428] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890795.538391462] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890796.538370407] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890797.538384408] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890798.538383798] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890799.538370339] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890800.538381310] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890801.538377416] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890801.538513772] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890802.538381600] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890803.538383206] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890804.538361370] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890805.538358365] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890806.538376335] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890807.538388783] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890808.538375740] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890809.538390488] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890810.538387650] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890811.538365977] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890811.538495485] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890812.538396576] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890813.538383444] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890814.538382006] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890815.538386374] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890816.538369540] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890817.538378992] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890818.538380234] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890819.538382834] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890820.538372519] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890821.538380139] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890821.538518607] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890822.538388060] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890823.538384987] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890824.538381480] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890825.538399299] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890826.538385707] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890827.538388480] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890828.538368931] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890829.538378581] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890830.538386547] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890831.538385920] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890831.538523107] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890832.538389978] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890833.538362784] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890834.538391349] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890835.538383895] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890836.538378311] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890837.538369060] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890838.538382094] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890839.538386342] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890840.538379531] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890841.538362173] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890841.538490976] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890842.538380093] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890843.538397738] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890844.538376260] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890845.538388427] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890846.538384159] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890847.538375169] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890848.538374607] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890849.538385035] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890850.538387380] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890851.538378858] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890851.538517710] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890852.538384109] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890853.538392381] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890854.538387513] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890855.538408708] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890856.538377242] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890857.538367869] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890858.538383822] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890859.538378571] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890860.538381333] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890861.538378251] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890861.538516079] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890862.538389039] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890863.538368191] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890864.538376828] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890865.538384294] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890866.538379516] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890867.538364927] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890868.538376399] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890869.538383915] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890870.538400884] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890871.538372969] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890871.538496492] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890872.538386539] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890873.538385977] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890874.538356499] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890875.538382267] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890876.538561204] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890877.538378607] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890878.538375643] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890879.538386932] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890880.538381369] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890881.538378122] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890881.538506638] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890882.538364167] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890883.538371825] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890884.538391784] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890885.538390090] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890886.538384920] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890887.538376819] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890888.538391770] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890889.538383724] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890890.538386187] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890891.538382646] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890891.538516218] [global_costmap.global_costmap]: Can't update static costmap layer, no map received
+[planner_server-7] [WARN] [1765890892.538377837] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890893.538393168] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890894.538379551] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890895.538384026] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-7] [WARN] [1765890896.538394689] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+^C[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-1] [INFO] [1765890897.173176600] [rclcpp]: signal_handler(signal_value=2)
+[INFO] [controller_server-6]: process has finished cleanly [pid 25946]
+[INFO] [recoveries_server-8]: process has finished cleanly [pid 25950]
+[INFO] [pointcloud_to_laserscan_node-4]: process has finished cleanly [pid 25942]
+[INFO] [bt_navigator-9]: process has finished cleanly [pid 25952]
+[INFO] [waypoint_follower-10]: process has finished cleanly [pid 25964]
+[INFO] [lifecycle_manager-11]: process has finished cleanly [pid 26003]
+[INFO] [pointcloud_to_laserscan_node-3]: process has finished cleanly [pid 25940]
+[planner_server-7] [INFO] [1765890897.173182552] [rclcpp]: signal_handler(signal_value=2)
+[component_container-2] [INFO] [1765890897.173213017] [rclcpp]: signal_handler(signal_value=2)
+[recoveries_server-8] [INFO] [1765890897.173223546] [rclcpp]: signal_handler(signal_value=2)
+[async_slam_toolbox_node-5] [INFO] [1765890897.173210457] [rclcpp]: signal_handler(signal_value=2)
+[waypoint_follower-10] [INFO] [1765890897.173245050] [rclcpp]: signal_handler(signal_value=2)
+[pointcloud_to_laserscan_node-3] [INFO] [1765890897.173199289] [rclcpp]: signal_handler(signal_value=2)
+[controller_server-6] [INFO] [1765890897.173353821] [rclcpp]: signal_handler(signal_value=2)
+[pointcloud_to_laserscan_node-4] [INFO] [1765890897.173364446] [rclcpp]: signal_handler(signal_value=2)
+[lifecycle_manager-11] [INFO] [1765890897.173385694] [rclcpp]: signal_handler(signal_value=2)
+[waypoint_follower-10] [INFO] [1765890897.179261797] [waypoint_follower]: Destroying
+[bt_navigator-9] [INFO] [1765890897.174697475] [rclcpp]: signal_handler(signal_value=2)
+[bt_navigator-9] [INFO] [1765890897.190002678] [bt_navigator]: Destroying
+[lifecycle_manager-11] [INFO] [1765890897.189746894] [lifecycle_manager_navigation]: Destroying
+[INFO] [component_container-2]: process has finished cleanly [pid 25938]
+[ERROR] [planner_server-7]: process has died [pid 25948, exit code -11, cmd '/opt/ros/foxy/lib/nav2_planner/planner_server --ros-args -r __node:=planner_server --params-file /tmp/tmp4opu7aft -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 25936]
+[ERROR] [async_slam_toolbox_node-5]: process has died [pid 25944, exit code -11, cmd '/opt/ros/foxy/lib/slam_toolbox/async_slam_toolbox_node --ros-args -r __node:=slam_toolbox --params-file /home/unitree/go2_ws1/install/go2_navigation/share/go2_navigation/config/slam_config.yaml --params-file /tmp/launch_params_yly54kg4 --params-file /tmp/launch_params_8o_jy9a4 --params-file /tmp/launch_params_gxhki62v --params-file /tmp/launch_params_lgwvt3f8 --params-file /tmp/launch_params_pqqdpwix'].

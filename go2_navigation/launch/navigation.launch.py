@@ -36,8 +36,8 @@ def generate_launch_description():
 
     declare_map_file_cmd = DeclareLaunchArgument(
         'map_file',
-        default_value='',
-        description='Full path to map yaml file to load for localization. (required for localization mode)'
+        default_value='/home/unitree/go2_ws1/map/map.yaml', # Valore di default vuoto. Se vuoi localizzare, devi specificarlo.
+        description='Full path to map yaml file to load for localization.'
     )
     map_file = LaunchConfiguration('map_file')
 
@@ -74,15 +74,14 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('go2_rviz'),
             'launch/'), 'rviz.launch.py']),
-        condition=IfCondition(rviz)
+        condition=IfCondition(PythonExpression([rviz]))
     )
 
     livox_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('livox_ros_driver2'),
             'launch_ROS2/'), 'rviz_MID360_launch.py'])
-        ,
-        condition=IfCondition(rviz)
+        # condition=IfCondition(PythonExpression([rviz]))
     )
 
     pointcloud_to_laserscan_node = Node(
@@ -129,8 +128,7 @@ def generate_launch_description():
             'launch/'), 'nav2_navigation_launch.py']),
         launch_arguments={
             'params_file': nav2_params_file, # <--- Qui passiamo il tuo file di configurazione
-            'use_sim_time': 'false',    # Passa use_sim_time anche a Nav2
-            'map_file': map_file
+            'use_sim_time': 'false'    # Passa use_sim_time anche a Nav2
             # 'autostart': 'true'              # Generalmente utile per Nav2
         }.items()
         # condition=IfCondition(PythonExpression([rviz]))
