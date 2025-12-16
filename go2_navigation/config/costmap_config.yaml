@@ -1,8 +1,13 @@
 global_costmap:
   global_costmap:
     ros__parameters:
+      # 频率设置很好，保持 1.0
       update_frequency: 1.0
       publish_frequency: 1.0
+      
+      # 🚨 关键修改：必须添加这个容忍度参数！
+      transform_tolerance: 3.0  # 允许 3秒 的 TF 延迟，防止报错
+      
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: false
@@ -24,6 +29,10 @@ global_costmap:
           clearing: True
           marking: True
           data_type: "PointCloud2"
+          
+          # 🚨 优化建议：Raytrace 对 CPU 消耗很大
+          # 如果 Global Costmap 卡顿，可以把 raytrace_max_range 设小一点或者直接把 clearing 设为 False
+          # (全局规划通常只需要静态地图，动态障碍物交给 Local Costmap 处理)
           raytrace_max_range: 3.0
           raytrace_min_range: 0.0
           obstacle_max_range: 2.5
@@ -33,6 +42,7 @@ global_costmap:
         cost_scaling_factor: 1.0
         inflation_radius: 0.7
       always_send_full_costmap: True
+
 
 amcl:
   ros__parameters:
@@ -65,7 +75,7 @@ amcl:
     save_pose_rate: 0.5
     sigma_hit: 0.2
     tf_broadcast: true
-    transform_tolerance: 1.0 # 稍微给大一点，适应 Nano 的性能
+    transform_tolerance: 3.0 # 稍微给大一点，适应 Nano 的性能
     update_min_a: 0.2
     update_min_d: 0.25
     z_hit: 0.5
@@ -74,11 +84,17 @@ amcl:
     z_short: 0.05
     scan_topic: /laser # 或者是 /laser，取决于 pointcloud_to_laserscan 的输出
 
+
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 15.0
-      publish_frequency: 15.0
+      # 🚨 关键修改 1：大幅降低频率
+      update_frequency: 5.0     # 从 15.0 降到 5.0 (Nano 建议值)
+      publish_frequency: 2.0    # 从 15.0 降到 2.0 (节省带宽)
+      
+      # 🚨 关键修改 2：增加 TF 容忍度
+      transform_tolerance: 2.0  # 新增！允许 2秒 的延迟，解决 "Extrapolation Error"
+      
       global_frame: odom
       robot_base_frame: base_link
       use_sim_time: false
@@ -88,10 +104,14 @@ local_costmap:
       resolution: 0.05
       robot_radius: 0.3
       plugins: ["voxel_layer", "inflation_layer"]
+      
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
-        publish_voxel_map: True
+        
+        # 🚨 优化建议：如果是正式跑，建议改为 False 节省资源
+        publish_voxel_map: True 
+        
         origin_z: 0.0
         z_resolution: 0.05
         z_voxels: 16
@@ -100,15 +120,18 @@ local_costmap:
         footprint_clearing_enabled: True
         observation_sources: pointcloud_dog
         pointcloud_dog:
-          topic: /pointcloud
+          topic: /pointcloud  # 确认你的驱动是否发布这个话题
           max_obstacle_height: 3.0
           clearing: True
           marking: True
           data_type: "PointCloud2"
-          raytrace_max_range: 4.0   # <--- Range massimo per "cancellare" lo spazio libero (raytracing).
+          
+          # Raytrace 参数保持现状即可，如果还卡，可以把 raytrace_max_range 调小到 3.0
+          raytrace_max_range: 4.0   
           raytrace_min_range: 0.0
-          obstacle_max_range: 3.5   # <--- Range massimo per "marcare" gli ostacoli.
+          obstacle_max_range: 3.5   
           obstacle_min_range: 0.0
+          
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 1.0
