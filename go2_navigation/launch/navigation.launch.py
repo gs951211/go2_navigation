@@ -36,8 +36,8 @@ def generate_launch_description():
 
     declare_map_file_cmd = DeclareLaunchArgument(
         'map_file',
-        default_value='/home/unitree/go2_ws1/map/map.yaml', # Valore di default vuoto. Se vuoi localizzare, devi specificarlo.
-        description='Full path to map yaml file to load for localization.'
+        default_value='',
+        description='Full path to map yaml file to load for localization. (required for localization mode)'
     )
     map_file = LaunchConfiguration('map_file')
 
@@ -128,7 +128,8 @@ def generate_launch_description():
             'launch/'), 'nav2_navigation_launch.py']),
         launch_arguments={
             'params_file': nav2_params_file, # <--- Qui passiamo il tuo file di configurazione
-            'use_sim_time': 'false'    # Passa use_sim_time anche a Nav2
+            'use_sim_time': 'false',    # Passa use_sim_time anche a Nav2
+            'map_file': map_file
             # 'autostart': 'true'              # Generalmente utile per Nav2
         }.items()
         # condition=IfCondition(PythonExpression([rviz]))
