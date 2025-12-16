@@ -51,7 +51,7 @@ amcl:
     save_pose_rate: 0.5
     
     # 运动模型
-    robot_model_type: "nav2_amcl::OmniMotionModel" # 使用完整类名更稳妥
+    robot_model_type: "differential" # 使用完整类名更稳妥
 
 global_costmap:
   global_costmap:
