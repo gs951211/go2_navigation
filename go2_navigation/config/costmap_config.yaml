@@ -130,7 +130,7 @@ local_costmap:
           raytrace_max_range: 4.0   # <--- Range massimo per "cancellare" lo spazio libero (raytracing).
           raytrace_min_range: 0.0
           obstacle_max_range: 3.5   # <--- Range massimo per "marcare" gli ostacoli.
-          obstacle_min_range: 0.0
+          obstacle_min_range: 0.5
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 1.0
@@ -147,7 +147,7 @@ planner_server:
       plugin: 'nav2_navfn_planner/NavfnPlanner' # In Iron and older versions, "/" was used instead of "::"
       use_astar: True
       allow_unknown: True
-      tolerance: 0.5
+      tolerance: 2.0
 
 bt_navigator:
   ros__parameters:
@@ -232,13 +232,13 @@ controller_server:
       stateful: True
     general_goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.8
-      yaw_goal_tolerance: 0.2
+      xy_goal_tolerance: 0.3
+      yaw_goal_tolerance: 0.3
       stateful: True
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -0.2
+      min_vel_x: 0.0
       min_vel_y: 0.0
       max_vel_x: 0.5
       max_vel_y: 0.0
