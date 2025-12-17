@@ -252,10 +252,10 @@ controller_server:
       decel_lim_x: -0.5
       decel_lim_y: 0.0
       decel_lim_theta: -1.0
-      vx_samples: 20 #20
-      vy_samples: 5 #5
-      vtheta_samples: 20 #20
-      sim_time: 1.7
+      vx_samples: 15
+      vy_samples: 0
+      vtheta_samples: 20
+      sim_time: 2.0
       linear_granularity: 0.05
       angular_granularity: 0.025
       transform_tolerance: 0.2
@@ -265,14 +265,14 @@ controller_server:
       limit_vel_cmd_in_traj: True
       stateful: True
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
-      BaseObstacle.scale: 1.00
-      PathAlign.scale: 50.0
-      GoalAlign.scale: 40.0
-      PathAlign.forward_point_distance: 0.25
-      GoalAlign.forward_point_distance: 0.25
-      PathDist.scale: 50.0
+      BaseObstacle.scale: 0.5
+      PathAlign.scale: 32.0
+      GoalAlign.scale: 24.0
+      PathAlign.forward_point_distance: 0.3
+      GoalAlign.forward_point_distance: 0.3
+      PathDist.scale: 32.0
       GoalDist.scale: 24.0
-      RotateToGoal.scale: 50.0
+      RotateToGoal.scale: 32.0
       RotateToGoal.slowing_factor: 2.0
       RotateToGoal.lookahead_time: -1.0
 
