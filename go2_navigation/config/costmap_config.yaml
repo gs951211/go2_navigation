@@ -93,7 +93,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 1.0
-        inflation_radius: 0.7
+        inflation_radius: 0.4
       always_send_full_costmap: True
 
 local_costmap:
@@ -134,7 +134,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 1.0
-        inflation_radius: 0.5
+        inflation_radius: 0.35
       always_send_full_costmap: True
 
 planner_server:
@@ -146,7 +146,7 @@ planner_server:
     GridBased:
       plugin: 'nav2_navfn_planner/NavfnPlanner' # In Iron and older versions, "/" was used instead of "::"
       use_astar: True
-      allow_unknown: False
+      allow_unknown: True
       tolerance: 0.5
 
 bt_navigator:
