@@ -25,8 +25,14 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     rviz = LaunchConfiguration('rviz')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     # slam_toolbox= LaunchConfiguration('slam_toolbox')
     
+    declare_use_sim_time_cmd = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false',
+        description='Use simulation time'
+    )
 
     declare_rviz_cmd = DeclareLaunchArgument(
         'rviz',
@@ -50,13 +56,6 @@ def generate_launch_description():
         description='Full path to the Nav2 parameters file to use.'
     )
     nav2_params_file = LaunchConfiguration('nav2_params_file')
-
-    declare_slam_enable_cmd = DeclareLaunchArgument(
-        'slam_enable',
-        default_value='True',
-        description='bool value to choose between mapping and navigation'
-    )
-    slam_enable = LaunchConfiguration('slam_enable')
 
     robot_description_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
@@ -104,7 +103,7 @@ def generate_launch_description():
             'range_max': 100.0,            # Distanza massima dei raggi laser
             'use_intensities': False,      # Se usare le intensità della point cloud
             'concurrency_level': 1,        # Livello di concorrenza per l'elaborazione
-            'use_sim_time': LaunchConfiguration('use_sim_time', default='false') # Aggiungi questo se hai un use_sim_time globale
+            'use_sim_time': use_sim_time   # Aggiungi questo se hai un use_sim_time globale
         }],
         output='screen'
     )
@@ -128,19 +127,20 @@ def generate_launch_description():
             'launch/'), 'nav2_navigation_launch.py']),
         launch_arguments={
             'params_file': nav2_params_file, # <--- Qui passiamo il tuo file di configurazione
-            'use_sim_time': 'false'    # Passa use_sim_time anche a Nav2
+            'use_sim_time': use_sim_time,    # Passa use_sim_time anche a Nav2
+            'map': map_file
             # 'autostart': 'true'              # Generalmente utile per Nav2
         }.items()
         # condition=IfCondition(PythonExpression([rviz]))
     )
 
     ld = LaunchDescription()
+    ld.add_action(declare_use_sim_time_cmd)
     # ld.add_action(declare_lidar_cmd)
     # ld.add_action(declare_realsense_cmd)
     ld.add_action(declare_rviz_cmd)
     ld.add_action(robot_description_cmd)
     ld.add_action(declare_nav2_params_file_cmd)
-    ld.add_action(declare_slam_enable_cmd)
     ld.add_action(declare_map_file_cmd)
     # ld.add_action(lidar_cmd)
     # ld.add_action(realsense_cmd)

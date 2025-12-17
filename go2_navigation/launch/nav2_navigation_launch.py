@@ -27,6 +27,7 @@ def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory('nav2_bringup')
 
+    map_yaml_file = LaunchConfiguration('map')
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')
@@ -60,7 +61,6 @@ def generate_launch_description():
 
     configured_params = RewrittenYaml(
             source_file=params_file,
-            root_key=namespace,
             param_rewrites=param_substitutions,
             convert_types=True)
 
@@ -71,7 +71,11 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'namespace', default_value='',
             description='Top-level namespace'),
-
+        DeclareLaunchArgument(
+            'map',
+            default_value='/home/unitree/go2_ws1/map/map.yaml',
+            description='Full path to map yaml file'
+        ),
         DeclareLaunchArgument(
             'use_sim_time', default_value='false',
             description='Use simulation (Gazebo) clock if true'),
@@ -100,10 +104,9 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
-            parameters=[
-                {'yaml_filename': "/home/unitree/go2_ws1/map/map.yaml"}
-                # {'use_sim_time': False}
-            ]
+            parameters=[{
+                'yaml_filename': map_yaml_file
+            }]            
         ),
 
         Node(
