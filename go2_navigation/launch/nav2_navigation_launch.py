@@ -104,9 +104,9 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
-            parameters=[{
-                'yaml_filename': map_yaml_file
-            }]            
+            parameters=[configured_params,
+                       {'yaml_filename': map_yaml_file}],
+            remappings=remappings
         ),
 
         Node(

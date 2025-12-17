@@ -4,9 +4,11 @@ amcl:
     
     # --- 关键修复区 (适配 Go2 硬件) ---
     base_frame_id: "base_link"   # 🚨 必须改！Go2 的基座叫 base_link
-    scan_topic: /laser           # 🚨 必须改！你的 2D 转换节点发的是 /laser
+    scan_topic: "/laser"          # 🚨 必须改！你的 2D 转换节点发的是 /laser
     odom_frame_id: "odom"
     global_frame_id: "map"
+    set_initial_pose: false
+    always_reset_initial_pose: false
     
     # --- 性能优化区 (适配 Jetson Nano) ---
     transform_tolerance: 3.0     # 🚨 必须大！Nano 算力弱，容忍度要高
@@ -52,6 +54,11 @@ amcl:
     
     # 运动模型
     robot_model_type: "omnidirectional" # 使用完整类名更稳妥
+
+map_server:
+  ros__parameters:
+    use_sim_time: False
+    yaml_filename: ""
 
 global_costmap:
   global_costmap:
@@ -147,7 +154,7 @@ bt_navigator:
     use_sim_time: False
     global_frame: map
     robot_base_frame: base_link
-    odom_topic: /utlidar/robot_odom
+    odom_topic: /odom
     # transform_tolerance: 0.1
     # filter_duration: 0.3
     # service_intropection_mode: "disabled"
@@ -210,11 +217,11 @@ controller_server:
     use_sim_time: False
     controller_frequency: 15.0
     costmap_update_timeout: 0.3
-    min_x_velocity_threshold: 0.1
-    min_y_velocity_threshold: 0.1
-    min_theta_velocity_threshold: 0.1
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.001
+    min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
-    odom_topic: "/utlidar/robot_odom"
+    odom_topic: "/odom"
     progress_checker_plugins: ["progress_checker_plugin"] # progress_checker_plugin: "progress_checker" For Humble and older
     goal_checker_plugins: ["general_goal_checker"] # goal_checker_plugin: "goal_checker" For Galactic and older
     controller_plugins: ["FollowPath"]
@@ -231,20 +238,20 @@ controller_server:
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: 0.0
-      min_vel_y: -0.5
-      max_vel_x: 1.00
-      max_vel_y: 0.5
+      min_vel_x: -0.2
+      min_vel_y: 0.0
+      max_vel_x: 0.5
+      max_vel_y: 0.0
       max_vel_theta: 1.0
       min_speed_xy: 0.0
-      max_speed_xy: 1.00
-      min_speed_theta: -1.0
-      acc_lim_x: 0.1
-      acc_lim_y: 0.1
-      acc_lim_theta: 0.5
-      decel_lim_x: -0.1 #-2.5
-      decel_lim_y: -0.1 #-2.5
-      decel_lim_theta: -1.0 #-3.2
+      max_speed_xy: 0.5
+      min_speed_theta: 0.0
+      acc_lim_x: 0.5
+      acc_lim_y: 0.0
+      acc_lim_theta: 1.0
+      decel_lim_x: -0.5
+      decel_lim_y: 0.0
+      decel_lim_theta: -1.0
       vx_samples: 20 #20
       vy_samples: 5 #5
       vtheta_samples: 20 #20
