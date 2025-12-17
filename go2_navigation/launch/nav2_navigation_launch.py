@@ -35,13 +35,15 @@ def generate_launch_description():
     default_bt_xml_filename = LaunchConfiguration('default_bt_xml_filename')
     map_subscribe_transient_local = LaunchConfiguration('map_subscribe_transient_local')
 
-    lifecycle_nodes = ['controller_server',
+    # 关键修复：先启动map_server和amcl，让AMCL提供map->base_link的TF变换
+    # 然后再启动需要这个变换的其他节点（planner_server, controller_server等）
+    lifecycle_nodes = ['map_server',
+                       'amcl',
+                       'controller_server',
                        'planner_server',
                        'recoveries_server',
                        'bt_navigator',
-                       'waypoint_follower',
-                       'map_server',
-                       'amcl']
+                       'waypoint_follower']
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
     # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
@@ -163,6 +165,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{'use_sim_time': use_sim_time},
                         {'autostart': autostart},
-                        {'node_names': lifecycle_nodes}]),
+                        {'node_names': lifecycle_nodes},
+                        {'bond_timeout': 4.0}]),
 
     ])
