@@ -99,7 +99,7 @@ def generate_launch_description():
             'angle_min': -3.14,            # Angolo minimo del laser scan (rad) (-pi)
             'angle_max': 3.14,             # Angolo massimo del laser scan (rad) (pi)
             'angle_increment': 0.0087,     # Incremento angolare del laser scan (rad) (~0.5 gradi)
-            'range_min': 0.1,              # Distanza minima dei raggi laser
+            'range_min': 0.6,              # Distanza minima dei raggi laser (filtro自检测)
             'range_max': 100.0,            # Distanza massima dei raggi laser
             'use_intensities': False,      # Se usare le intensità della point cloud
             'concurrency_level': 1,        # Livello di concorrenza per l'elaborazione
