@@ -11,21 +11,21 @@ amcl:
     always_reset_initial_pose: false
     
     # --- 性能优化区 (适配 Jetson Nano) ---
-    transform_tolerance: 3.0     # 🚨 必须大！Nano 算力弱，容忍度要高
+    transform_tolerance: 0.5     # 🚨 必须大！Nano 算力弱，容忍度要高
     tf_broadcast: true
     
     # --- 算法参数区 (保留 L2 雷达的优秀参数) ---
-    alpha1: 0.2
-    alpha2: 0.2
-    alpha3: 0.2
-    alpha4: 0.2
-    alpha5: 0.2
+    alpha1: 0.5
+    alpha2: 0.5
+    alpha3: 0.5
+    alpha4: 0.5
+    alpha5: 0.5
 
     laser_model_type: "likelihood_field"
     laser_max_range: 50.0       
     laser_min_range: -1.0
     
-    max_beams: 30               
+    max_beams: 120               
     
     # --- 修改点 3: 信任度调整 ---
     # 原配置 (0.5/0.5) 意味着“我只有一半把握那是墙，另一半可能是噪点”。
@@ -38,10 +38,10 @@ amcl:
     
     sigma_hit: 0.2
     lambda_short: 0.1
-    laser_likelihood_max_dist: 2.0
+    laser_likelihood_max_dist: 4.0
     
     # 粒子滤波参数
-    max_particles: 2000
+    max_particles: 5000
     min_particles: 500
     pf_err: 0.05
     pf_z: 0.99
@@ -49,7 +49,7 @@ amcl:
     recovery_alpha_fast: 0.0
     recovery_alpha_slow: 0.0
     update_min_a: 0.2
-    update_min_d: 0.25
+    update_min_d: 0.1
     save_pose_rate: 0.5
     
     # 运动模型
@@ -122,8 +122,8 @@ local_costmap:
         publish_voxel_map: False
         # Gemini修改：0.0 -> 0.18。原因：Go2 的 IMU 中心在机身内部，0.18m 的起始高度能彻底过滤掉因下倾角扫到的前腿根部和机头盖。
         origin_z: 0.20
-        z_resolution: 0.05
-        z_voxels: 16
+        z_resolution: 0.02
+        z_voxels: 32
         max_obstacle_height: 3.0
         mark_threshold: 3
         footprint_clearing_enabled: True
@@ -229,7 +229,7 @@ bt_navigator:
 controller_server:
   ros__parameters:
     use_sim_time: False
-    controller_frequency: 15.0
+    controller_frequency: 30.0
     costmap_update_timeout: 0.3
     # gemini修改：提高速度阈值，过滤里程计微小漂移导致的抖动
     min_x_velocity_threshold: 0.01
@@ -272,9 +272,9 @@ controller_server:
       decel_lim_x: -0.8
       decel_lim_y: -0.5 # Gemini修改: 0.0 -> -0.5 [Y轴减速度]
       decel_lim_theta: -1.0
-      vx_samples: 25    # gemini修改：增加采样，寻找更精细的轨迹
+      vx_samples: 40    # gemini修改：增加采样，寻找更精细的轨迹
       vy_samples: 10 # Gemini修改: 0 -> 10 [必须大于0，控制器才会尝试搜索侧向移动的路径]
-      vtheta_samples: 25 # Gemini修改: 20 -> 25 [增加旋转采样，减少原地磨蹭]
+      vtheta_samples: 35 # Gemini修改: 20 -> 25 [增加旋转采样，减少原地磨蹭]
       sim_time: 2.0
       linear_granularity: 0.03 # gemini修改：轨迹细化，每3cm模拟一次
       angular_granularity: 0.025
