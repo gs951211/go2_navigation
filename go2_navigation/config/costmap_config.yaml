@@ -139,7 +139,7 @@ local_costmap:
           raytrace_min_range: 0.0
           obstacle_max_range: 3.5   # <--- Range massimo per "marcare" gli ostacoli.
           # gemini修改：设为0.25m。解决撞腿关键点，不能再大了，否则狗头前是死区。
-          obstacle_min_range: 0.25
+          obstacle_min_range: 0.15
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         # gemini修改：设为5.0。增加代价梯度厚度，提供更强的物理阻尼感
