@@ -260,16 +260,16 @@ controller_server:
       # 这样可以防止在终点附近由于微小偏差导致的“磨蹭”。
       min_vel_x: 0.0
       min_vel_y: -0.1
-      max_vel_x: 0.3    # gemini修改：再次降低限速。过窄门时，“慢”就是“快”，防止狗头晃动撞门。
+      max_vel_x: 0.5    # gemini修改：再次降低限速。过窄门时，“慢”就是“快”，防止狗头晃动撞门。
       max_vel_y: 0.1 #gemini
       max_vel_theta: 0.6 # gemini修改：降低旋转速度，让转弯更稳。
       min_speed_xy: 0.0
-      max_speed_xy: 0.5
+      max_speed_xy: 0.6
       min_speed_theta: 0.0
-      acc_lim_x: 0.5
+      acc_lim_x: 0.8
       acc_lim_y: 0.5  #gemini
       acc_lim_theta: 1.0
-      decel_lim_x: -0.5
+      decel_lim_x: -0.8
       decel_lim_y: -0.5 # Gemini修改: 0.0 -> -0.5 [Y轴减速度]
       decel_lim_theta: -1.0
       vx_samples: 25    # gemini修改：增加采样，寻找更精细的轨迹
@@ -288,19 +288,19 @@ controller_server:
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
       # gemini修改：增加震荡抑制器的权重。
       # Oscillation 专门用于处理这种来回摆动的问题。
-      Oscillation.scale: 8.0
+      Oscillation.scale: 5.0
       # gemini修改：权重回升至 5.0。
       # 既然 min_range 调大了，我们必须通过提高评分权重，让算法在仅有的点云信息中极度“避战”。
       BaseObstacle.scale: 6.0
       # gemini修改：降至 20.0。
       # 之前 64.0 太高了，导致狗“死脑筋”非要走直线，甚至不惜撞墙也要贴线。
       # 降低它可以让它在发现侧面要撞门时，有灵活性稍微绕一下。
-      PathAlign.scale: 25.0     
+      PathAlign.scale: 15.0     
       GoalAlign.scale: 12.0
       PathAlign.forward_point_distance: 0.3
       GoalAlign.forward_point_distance: 0.3
-      PathDist.scale: 32.0
-      GoalDist.scale: 20.0
+      PathDist.scale: 24.0
+      GoalDist.scale: 30.0
       # gemini修改：调整终点旋转评分逻辑
       # slowing_factor 决定了靠近目标时减速的平滑度，调大它可以让旋转更缓和，减少过冲。
       RotateToGoal.scale: 32.0
