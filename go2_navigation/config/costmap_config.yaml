@@ -69,8 +69,8 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: false
       # robot_radius: 0.3
-      # Gemini修改：由 robot_radius 改为 footprint。原因：官方给出的雷达偏移量 X=0.187 证实了机头较长，矩形能更准确描述避障空间。
-      footprint: "[ [0.35, 0.16], [0.35, -0.16], [-0.35, -0.16], [-0.35, 0.16] ]"
+      # gemini修改：全局地图也同步足迹宽度，防止规划出过窄的路径
+      footprint: "[ [0.35, 0.19], [0.35, -0.19], [-0.35, -0.19], [-0.35, 0.19] ]"
       resolution: 0.05
       track_unknown_space: True
       rolling_window: false
@@ -112,15 +112,16 @@ local_costmap:
       height: 4
       resolution: 0.05
       # robot_radius: 0.3
-      # gemini修改：宽度设为0.18（对应36cm），留出摆腿余量。如果还撞，可改为0.19。
-      footprint: "[ [0.35, 0.18], [0.35, -0.18], [-0.35, -0.18], [-0.35, 0.18] ]"
+    # gemini修改：宽度增加到0.19（总宽38cm）。
+      # 过50cm门时，如果狗歪了，0.19的足迹能更早触发碰撞警告，让它及时纠偏。
+      footprint: "[ [0.35, 0.19], [0.35, -0.19], [-0.35, -0.19], [-0.35, 0.19] ]"
       plugins: ["voxel_layer", "inflation_layer"]
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
         publish_voxel_map: False
         # Gemini修改：0.0 -> 0.18。原因：Go2 的 IMU 中心在机身内部，0.18m 的起始高度能彻底过滤掉因下倾角扫到的前腿根部和机头盖。
-        origin_z: 0.05
+        origin_z: 0.08
         z_resolution: 0.05
         z_voxels: 16
         max_obstacle_height: 3.0
@@ -130,16 +131,17 @@ local_costmap:
         pointcloud_dog:
           topic: /pointcloud
           max_obstacle_height: 3.0
-          # Gemini修改：新增 min_obstacle_height: 0.18。原因：配合 voxel 的 origin_z，确保一闪一闪的机身干扰点不被计入代价地图。
-          min_obstacle_height: 0.05
+          min_obstacle_height: 0.08 # gemini修改：同步调整
           clearing: True
           marking: True
           data_type: "PointCloud2"
           raytrace_max_range: 4.0   # <--- Range massimo per "cancellare" lo spazio libero (raytracing).
           raytrace_min_range: 0.0
           obstacle_max_range: 3.5   # <--- Range massimo per "marcare" gli ostacoli.
-          # gemini修改：设为0.25m。解决撞腿关键点，不能再大了，否则狗头前是死区。
-          obstacle_min_range: 0.15
+          # gemini修改：从0.15回升到0.22。
+          # 这是消除“黑团”的底线距离。如果还有，调到0.25。
+          # 配合下面的 BaseObstacle 权重来补足碰撞检测。
+          obstacle_min_range: 0.22
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         # gemini修改：大幅增加 scaling_factor (10.0 -> 25.0)。
@@ -229,9 +231,10 @@ controller_server:
     use_sim_time: False
     controller_frequency: 15.0
     costmap_update_timeout: 0.3
-    min_x_velocity_threshold: 0.001
-    min_y_velocity_threshold: 0.001
-    min_theta_velocity_threshold: 0.001
+    # gemini修改：提高速度阈值，过滤里程计微小漂移导致的抖动
+    min_x_velocity_threshold: 0.01
+    min_y_velocity_threshold: 0.01
+    min_theta_velocity_threshold: 0.01
     failure_tolerance: 0.3
     odom_topic: "/odom"
     progress_checker_plugins: ["progress_checker_plugin"] # progress_checker_plugin: "progress_checker" For Humble and older
@@ -244,9 +247,8 @@ controller_server:
       stateful: True
     general_goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      # gemini修改：放宽距离容差（0.1 -> 0.2m）。
-      # 机器狗在最后刹车时会有惯性抖动，0.2m能让它更容易“判定到达”，避免为了蹭那几厘米而左右横跳。
-      xy_goal_tolerance: 0.20
+      # gemini修改：继续放宽容差，给四足机器人步态留出呼吸空间。
+      xy_goal_tolerance: 0.25
       # gemini修改：放宽角度容差（0.1 -> 0.25rad）。
       # 约14度，防止狗为了纠正极小的角度偏差而在终点反复调整。
       yaw_goal_tolerance: 0.25
@@ -254,11 +256,13 @@ controller_server:
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: 0.0
-      min_vel_y: -0.2 #gemini
-      max_vel_x: 0.4
-      max_vel_y: 0.2 #gemini
-      max_vel_theta: 1.0
+      # gemini修改：设置最小速度死区。如果计算出的速度低于 0.05m/s，直接不走。
+      # 这样可以防止在终点附近由于微小偏差导致的“磨蹭”。
+      min_vel_x: 0.05
+      min_vel_y: -0.05
+      max_vel_x: 0.3    # gemini修改：再次降低限速。过窄门时，“慢”就是“快”，防止狗头晃动撞门。
+      max_vel_y: 0.1 #gemini
+      max_vel_theta: 0.6 # gemini修改：降低旋转速度，让转弯更稳。
       min_speed_xy: 0.0
       max_speed_xy: 0.5
       min_speed_theta: 0.0
@@ -268,26 +272,31 @@ controller_server:
       decel_lim_x: -0.5
       decel_lim_y: -0.5 # Gemini修改: 0.0 -> -0.5 [Y轴减速度]
       decel_lim_theta: -1.0
-      vx_samples: 20 # Gemini修改: 15 -> 20 [增加采样数，让速度规划更平滑]
+      vx_samples: 25    # gemini修改：增加采样，寻找更精细的轨迹
       vy_samples: 10 # Gemini修改: 0 -> 10 [必须大于0，控制器才会尝试搜索侧向移动的路径]
       vtheta_samples: 25 # Gemini修改: 20 -> 25 [增加旋转采样，减少原地磨蹭]
       sim_time: 2.0
-      linear_granularity: 0.05
+      linear_granularity: 0.03 # gemini修改：轨迹细化，每3cm模拟一次
       angular_granularity: 0.025
       transform_tolerance: 0.2
       # gemini修改：此处容差应与 goal_checker 保持一致
-      xy_goal_tolerance: 0.20
+      xy_goal_tolerance: 0.25
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: True
       stateful: True
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
-      # [Gemini修改]：略微降低对障碍物的恐惧
-      # 之前改为 2.0，如果你发现它在狭窄处还是犹豫，可以稍微降回 1.0 或 1.5
-      # 因为 footprint 变精确了，这里不需要太高。
-      BaseObstacle.scale: 4.0   # Gemini修改: 0.5 -> 2.0 [提高障碍物权重，让机器人主动避让，而不是等撞上了才停]
-      PathAlign.scale: 64.0     # Gemini修改: 32.0 -> 12.0 [大幅降低路径贴合权重，允许机器人为了避障或平滑运动而暂时偏离中心线]
-      GoalAlign.scale: 16.0      # Gemini修改: 24.0 -> 8.0 [同上，降低对齐权重要求，减少蛇形走位]
+      # gemini修改：增加震荡抑制器的权重。
+      # Oscillation 专门用于处理这种来回摆动的问题。
+      Oscillation.scale: 5.0
+      # gemini修改：权重回升至 5.0。
+      # 既然 min_range 调大了，我们必须通过提高评分权重，让算法在仅有的点云信息中极度“避战”。
+      BaseObstacle.scale: 5.0
+      # gemini修改：降至 20.0。
+      # 之前 64.0 太高了，导致狗“死脑筋”非要走直线，甚至不惜撞墙也要贴线。
+      # 降低它可以让它在发现侧面要撞门时，有灵活性稍微绕一下。
+      PathAlign.scale: 20.0     
+      GoalAlign.scale: 10.0
       PathAlign.forward_point_distance: 0.3
       GoalAlign.forward_point_distance: 0.3
       PathDist.scale: 32.0
@@ -295,7 +304,7 @@ controller_server:
       # gemini修改：调整终点旋转评分逻辑
       # slowing_factor 决定了靠近目标时减速的平滑度，调大它可以让旋转更缓和，减少过冲。
       RotateToGoal.scale: 32.0
-      RotateToGoal.slowing_factor: 7.0
+      RotateToGoal.slowing_factor: 10.0
       # gemini修改：lookahead_time 设为 -1.0 表示使用当前的 yaw。
       # 如果还是左右转，可以尝试设为 0.1 ~ 0.2，让它预测一下旋转。
       RotateToGoal.lookahead_time: -1.0
