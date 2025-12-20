@@ -121,7 +121,7 @@ local_costmap:
         enabled: True
         publish_voxel_map: False
         # Gemini修改：0.0 -> 0.18。原因：Go2 的 IMU 中心在机身内部，0.18m 的起始高度能彻底过滤掉因下倾角扫到的前腿根部和机头盖。
-        origin_z: 0.08
+        origin_z: 0.12
         z_resolution: 0.05
         z_voxels: 16
         max_obstacle_height: 3.0
@@ -131,7 +131,7 @@ local_costmap:
         pointcloud_dog:
           topic: /pointcloud
           max_obstacle_height: 3.0
-          min_obstacle_height: 0.08 # gemini修改：同步调整
+          min_obstacle_height: 0.12 # gemini修改：同步调整
           clearing: True
           marking: True
           data_type: "PointCloud2"
@@ -141,14 +141,14 @@ local_costmap:
           # gemini修改：从0.15回升到0.22。
           # 这是消除“黑团”的底线距离。如果还有，调到0.25。
           # 配合下面的 BaseObstacle 权重来补足碰撞检测。
-          obstacle_min_range: 0.22
+          obstacle_min_range: 0.25
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         # gemini修改：大幅增加 scaling_factor (10.0 -> 25.0)。
         # 这会让障碍物周围的“危险区”变得很窄，只要不贴死门框，代价就会降到很低。
         cost_scaling_factor: 25.0 
         # gemini修改：缩小半径到0.25。过窄门时，如果这个值大于门缝的一半，狗会因为找不到路而拒行。
-        inflation_radius: 0.25
+        inflation_radius: 0.3
       always_send_full_costmap: True
 
 planner_server:
@@ -258,8 +258,8 @@ controller_server:
       debug_trajectory_details: True
       # gemini修改：设置最小速度死区。如果计算出的速度低于 0.05m/s，直接不走。
       # 这样可以防止在终点附近由于微小偏差导致的“磨蹭”。
-      min_vel_x: 0.05
-      min_vel_y: -0.05
+      min_vel_x: 0.0
+      min_vel_y: -0.1
       max_vel_x: 0.3    # gemini修改：再次降低限速。过窄门时，“慢”就是“快”，防止狗头晃动撞门。
       max_vel_y: 0.1 #gemini
       max_vel_theta: 0.6 # gemini修改：降低旋转速度，让转弯更稳。
@@ -281,22 +281,22 @@ controller_server:
       transform_tolerance: 0.2
       # gemini修改：此处容差应与 goal_checker 保持一致
       xy_goal_tolerance: 0.25
-      trans_stopped_velocity: 0.25
+      trans_stopped_velocity: 0.1
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: True
       stateful: True
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
       # gemini修改：增加震荡抑制器的权重。
       # Oscillation 专门用于处理这种来回摆动的问题。
-      Oscillation.scale: 5.0
+      Oscillation.scale: 8.0
       # gemini修改：权重回升至 5.0。
       # 既然 min_range 调大了，我们必须通过提高评分权重，让算法在仅有的点云信息中极度“避战”。
       BaseObstacle.scale: 5.0
       # gemini修改：降至 20.0。
       # 之前 64.0 太高了，导致狗“死脑筋”非要走直线，甚至不惜撞墙也要贴线。
       # 降低它可以让它在发现侧面要撞门时，有灵活性稍微绕一下。
-      PathAlign.scale: 20.0     
-      GoalAlign.scale: 10.0
+      PathAlign.scale: 25.0     
+      GoalAlign.scale: 12.0
       PathAlign.forward_point_distance: 0.3
       GoalAlign.forward_point_distance: 0.3
       PathDist.scale: 32.0
@@ -304,7 +304,7 @@ controller_server:
       # gemini修改：调整终点旋转评分逻辑
       # slowing_factor 决定了靠近目标时减速的平滑度，调大它可以让旋转更缓和，减少过冲。
       RotateToGoal.scale: 32.0
-      RotateToGoal.slowing_factor: 10.0
+      RotateToGoal.slowing_factor: 12.0
       # gemini修改：lookahead_time 设为 -1.0 表示使用当前的 yaw。
       # 如果还是左右转，可以尝试设为 0.1 ~ 0.2，让它预测一下旋转。
       RotateToGoal.lookahead_time: -1.0
