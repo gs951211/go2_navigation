@@ -69,9 +69,8 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: false
       # robot_radius: 0.3
-      # [Gemini修改]：全局规划也需要知道狗是长条形的，否则它规划路径时就会绕远路
-      # robot_radius: 0.3 <-- 删除这一行
-      footprint: "[ [0.35, 0.15], [0.35, -0.15], [-0.35, -0.15], [-0.35, 0.15] ]"
+      # Gemini修改：由 robot_radius 改为 footprint。原因：官方给出的雷达偏移量 X=0.187 证实了机头较长，矩形能更准确描述避障空间。
+      footprint: "[ [0.35, 0.16], [0.35, -0.16], [-0.35, -0.16], [-0.35, 0.16] ]"
       resolution: 0.05
       track_unknown_space: True
       rolling_window: false
@@ -92,7 +91,8 @@ global_costmap:
           raytrace_max_range: 3.0
           raytrace_min_range: 0.0
           obstacle_max_range: 2.5
-          obstacle_min_range: 0.2 # Gemini修改: 0.6 -> 0.2 [Mid360盲区很小，设置0.6会导致机器人看不见脚边障碍物]
+          # Gemini修改：0.2 -> 0.35。原因：雷达中心距离机头前端约 0.16m，加上 13° 下倾角，0.2m 极易扫到机壳边缘。
+          obstacle_min_range: 0.35
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 5.0 # Gemini修改: 1.0 -> 3.0 [增大衰减因子，让障碍物代价下降更快，允许机器人更靠近墙壁而不报错]
@@ -112,17 +112,15 @@ local_costmap:
       height: 4
       resolution: 0.05
       # robot_radius: 0.3
-      # [Gemini重点修改 1]：弃用圆半径，改用矩形足迹
-      # robot_radius: 0.3  <-- 删除或注释掉这一行
-      # Go2 机身长约 0.7m，宽约 0.3m。我们要描绘一个紧贴机身的矩形。
-      # 格式: [ [x1, y1], [x2, y2], ... ]
-      footprint: "[ [0.35, 0.15], [0.35, -0.15], [-0.35, -0.15], [-0.35, 0.15] ]"
+      # Gemini修改：与全局保持一致，使用精确机身描述，让狗敢于钻过窄缝。
+      footprint: "[ [0.35, 0.16], [0.35, -0.16], [-0.35, -0.16], [-0.35, 0.16] ]"
       plugins: ["voxel_layer", "inflation_layer"]
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
         publish_voxel_map: False
-        origin_z: 0.0
+        # Gemini修改：0.0 -> 0.18。原因：Go2 的 IMU 中心在机身内部，0.18m 的起始高度能彻底过滤掉因下倾角扫到的前腿根部和机头盖。
+        origin_z: 0.18
         z_resolution: 0.05
         z_voxels: 16
         max_obstacle_height: 3.0
@@ -132,13 +130,16 @@ local_costmap:
         pointcloud_dog:
           topic: /pointcloud
           max_obstacle_height: 3.0
+          # Gemini修改：新增 min_obstacle_height: 0.18。原因：配合 voxel 的 origin_z，确保一闪一闪的机身干扰点不被计入代价地图。
+          min_obstacle_height: 0.18
           clearing: True
           marking: True
           data_type: "PointCloud2"
           raytrace_max_range: 4.0   # <--- Range massimo per "cancellare" lo spazio libero (raytracing).
           raytrace_min_range: 0.0
           obstacle_max_range: 3.5   # <--- Range massimo per "marcare" gli ostacoli.
-          obstacle_min_range: 0.2 # Gemini修改: 0.5 -> 0.2 [同上，确保近距离避障有效]
+          # Gemini修改：0.2 -> 0.38。原因：Mid360 盲区极小，但安装支架和机壳在 0.3m 范围内，设为 0.38 可物理屏蔽掉这些闪烁的虚假障碍物。
+          obstacle_min_range: 0.38
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         # [Gemini重点修改 2]：让障碍物边缘像刀切一样锋利
