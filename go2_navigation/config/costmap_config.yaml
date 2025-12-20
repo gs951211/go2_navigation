@@ -92,7 +92,7 @@ global_costmap:
           raytrace_min_range: 0.0
           obstacle_max_range: 2.5
           # Gemini修改：0.2 -> 0.35。原因：雷达中心距离机头前端约 0.16m，加上 13° 下倾角，0.2m 极易扫到机壳边缘。
-          obstacle_min_range: 0.25
+          obstacle_min_range: 0.3
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 15.0 # Gemini修改: 1.0 -> 3.0 [增大衰减因子，让障碍物代价下降更快，允许机器人更靠近墙壁而不报错]
@@ -121,7 +121,7 @@ local_costmap:
         enabled: True
         publish_voxel_map: False
         # Gemini修改：0.0 -> 0.18。原因：Go2 的 IMU 中心在机身内部，0.18m 的起始高度能彻底过滤掉因下倾角扫到的前腿根部和机头盖。
-        origin_z: 0.12
+        origin_z: 0.15
         z_resolution: 0.05
         z_voxels: 16
         max_obstacle_height: 3.0
@@ -131,7 +131,7 @@ local_costmap:
         pointcloud_dog:
           topic: /pointcloud
           max_obstacle_height: 3.0
-          min_obstacle_height: 0.12 # gemini修改：同步调整
+          min_obstacle_height: 0.15 # gemini修改：同步调整
           clearing: True
           marking: True
           data_type: "PointCloud2"
@@ -141,7 +141,7 @@ local_costmap:
           # gemini修改：从0.15回升到0.22。
           # 这是消除“黑团”的底线距离。如果还有，调到0.25。
           # 配合下面的 BaseObstacle 权重来补足碰撞检测。
-          obstacle_min_range: 0.25
+          obstacle_min_range: 0.28
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         # gemini修改：大幅增加 scaling_factor (10.0 -> 25.0)。
@@ -291,7 +291,7 @@ controller_server:
       Oscillation.scale: 8.0
       # gemini修改：权重回升至 5.0。
       # 既然 min_range 调大了，我们必须通过提高评分权重，让算法在仅有的点云信息中极度“避战”。
-      BaseObstacle.scale: 5.0
+      BaseObstacle.scale: 6.0
       # gemini修改：降至 20.0。
       # 之前 64.0 太高了，导致狗“死脑筋”非要走直线，甚至不惜撞墙也要贴线。
       # 降低它可以让它在发现侧面要撞门时，有灵活性稍微绕一下。
