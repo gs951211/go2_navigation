@@ -1,58 +1,64 @@
 /**:
   ros__parameters:
-    use_sim_time: false           
+    # --- 硬件性能释放区 ---
+    use_sim_time: false
+    transform_timeout: 0.1          # Orin计算快，降低容忍度，减少坐标系延迟
+    tf_buffer_duration: 30.0
+    transform_publish_period: 0.01  # 🚀 100Hz TF发布：让Go2的动作在Rviz里丝滑顺畅
 
+    # --- 话题与数据流 ---
+    scan_topic: /laser
+    scan_header_buffer_time: 1.0
+    scan_queue_size: 20             # 增大队列，防止在高负载回环计算时丢帧
     
-    scan_topic: /laser           
-    # pointcloud_topic: /livox/lidar 
-    scan_header_buffer_time: 1.0  
-    scan_queue_size: 10
-    # min_range: 0.25
+    base_frame: base_link
+    odom_frame: odom
+    map_frame: map
 
-    base_frame: base_link         
-    odom_frame: odom              
-    map_frame: map                
-
-    map_start_pose: [0.0, 0.0, 0.0] 
-    # map_resolution: 0.05          
-    # map_size_x: 20.0              
-    # map_size_y: 20.0              
-
-    minimum_time_between_scans: 0.5 
-    minimum_travel_distance: 0.2  
-    minimum_travel_angle: 0.1     
-
-    max_icp_iterations: 100       
-    max_keyframes_to_try: 50      
-    loop_search_maximum_distance: 5.0 
-    loop_search_minimum_distance: 0.5 
-    loop_search_space: 1.0        
-    loop_closure_threshold: 0.7   
-
-    # filter_parameter_active: true 
-    # filter_size_a: 0.5            
-    # filter_size_b: 0.5            
-
-    debug_map_output: false       
-    debug_map_resolution: 0.05    
-    output_directory: /tmp/slam_toolbox_debug 
-
-    #ceres_solver_options.max_num_iterations: 100
-    #ceres_solver_options.function_tolerance: 1e-6
-    #ceres_solver_options.gradient_tolerance: 1e-8
-
-    # throttle_scans: false          
-    max_keyframes_per_second: 1.0  
-
-    # map_file_name: /home/unitree/go2_ws1/map/map                  
-    save_map_on_shutdown: true   
-    load_map_on_startup: true    
-    use_map_saver: true
+    # --- 匹配精度控制 (High-Precision) ---
+    resolution: 0.04                # 🚀 细化栅格：Orin处理0.04甚至0.03都很轻松
+    map_start_pose: [0.0, 0.0, 0.0]
     
-    # transform_publish_period: 0
-    # distance_variance_penalty: 0.5
+    # 关键帧触发：调小阈值，让建图对微小位移更敏感，减少匹配跳变
+    minimum_time_between_scans: 0.05 
+    minimum_travel_distance: 0.1    # 🚀 0.1m就更新一次：提高路径细节采集度
+    minimum_travel_heading: 0.08    # 提升旋转灵敏度
 
-    # min_laser_range: 0.2
-    # max_laser_range: 30.0
+    # --- 匹配算法核心 (Match Engine) ---
+    use_scan_matching: true
+    use_scan_barycenter: true
+    minimum_score: 0.08             # 既保证质量，又防止在开阔地带断流
+    
+    # 🚀 扫描匹配搜索深度：这是Orin NX的用武之地
+    max_icp_iterations: 150         # 🚀 提升：从默认的50-100提升至150，匹配更死磕
+    coarse_search_angle_offset: 0.349
+    fine_search_angle_offset: 0.002 # 🚀 精细化：更小的旋转步长，提高墙角/柱子的锐度
+    
+    # --- 回环检测与图优化 (Loop Closure) ---
+    do_loop_closing: true
+    max_keyframes_to_try: 100       # 🚀 提升：搜索更多历史关键帧，增强地图闭合能力
+    
+    loop_search_maximum_distance: 15.0 # 扩大搜索范围，适应大尺度漂移修正
+    loop_search_minimum_distance: 0.4
+    loop_search_space: 2.0
+    loop_closure_threshold: 0.6     # 回环判定阈值
+    
+    loop_match_minimum_chain_size: 10
+    loop_match_maximum_variance_coarse: 0.3
+    loop_match_maximum_variance_fine: 0.03
 
+    # --- 求解器性能 (Ceres Solver) ---
+    # 增加迭代次数，让地图闭合后的变形纠正更完美
+    "ceres_solver_options.max_num_iterations": 200
+    "ceres_solver_options.function_tolerance": 1e-7
+    "ceres_solver_options.gradient_tolerance": 1e-9
+
+    # --- 范围过滤 ---
+    # 这里的参数会直接覆盖Launch里的限制，作为SLAM内部的最后一道关卡
+    max_laser_range: 50.0           # 性能冗余，兼顾室内外
+    min_laser_range: 0.35           # 🚀 物理过滤：避开Go2自留的噪点区
+
+    # --- 状态管理 ---
     use_lifecycle: true
+    save_map_on_shutdown: true
+    use_map_saver: true
