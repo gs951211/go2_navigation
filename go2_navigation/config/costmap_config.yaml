@@ -133,7 +133,7 @@ local_costmap:
           obstacle_min_range: 0.2 # Gemini修改: 0.5 -> 0.2 [同上，确保近距离避障有效]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 5.0 # Gemini修改: 1.0 -> 5.0 [局部地图需要更“果断”，值越大，非碰撞区的代价越低，运动越流畅]
+        cost_scaling_factor: 3.5 # Gemini修改: 1.0 -> 5.0 [局部地图需要更“果断”，值越大，非碰撞区的代价越低，运动越流畅]
         inflation_radius: 0.55
       always_send_full_costmap: True
 
